@@ -18,7 +18,7 @@ const citiesReducer = () => {
   ]
 };
 
-const selectedCityReducer = (selectedCity = null, action) => {
+const selectedCityReducer = (selectedCity = '', action) => {
   switch (action.type ) {
     case SELECT_CITY:
       return action.payload;
