@@ -12,13 +12,13 @@ export class CityList extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Select a city</h1>
+      <React.Fragment>
+        <h2>Select a city</h2>
         <Select
           selected={this.props.citySelected}
           options={this.props.cities}
           onChange={this.setCity} />
-      </div>
+      </React.Fragment>
     )
   }
 }
