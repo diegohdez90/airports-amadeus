@@ -1,5 +1,11 @@
 import { combineReducers } from "redux";
-import { SELECT_CITY, SELECT_FLIGHT } from "../constants";
+import {
+  SELECT_ORIGIN_CITY,
+  SELECT_DESTINY_CITY,
+  SELECT_FLIGHT, 
+  FETCH_FLIGHTS,
+  FETCH_ORIGIN_CITY,
+  FETCH_DESTINY_CITY } from "../constants";
 
 const citiesReducer = () => {
   return [
@@ -18,13 +24,51 @@ const citiesReducer = () => {
   ]
 };
 
-const selectedCityReducer = (selectedCity = '', action) => {
-  switch (action.type ) {
-    case SELECT_CITY:
+const selectedOriginCityReducer = (selectedCity = '', action) => {
+  switch (action.type) {
+    case SELECT_ORIGIN_CITY:
       return action.payload;
   
     default:
       return selectedCity;
+  }
+}
+
+const selectedDestinyCityReducer = (selectedCity = '', action) => {
+  switch (action.type) {
+    case SELECT_DESTINY_CITY:
+      return action.payload;
+
+    default:
+      return selectedCity;
+  }
+}
+
+const originCities =  (state = [], action) => {
+  switch (action.type) {
+    case FETCH_ORIGIN_CITY:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+const destinyCities = (state = [], action) => {
+  switch (action.type) {
+    case FETCH_DESTINY_CITY:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+const flights = (state = [], action) => {
+  switch (action.type) {
+    case FETCH_FLIGHTS:
+      return action.payload;
+  
+    default:
+      return state;
   }
 }
 
@@ -48,7 +92,11 @@ const bookFlights = () => {
 
 export default combineReducers({
   cities: citiesReducer,
-  citySelected: selectedCityReducer,
+  originCities: originCities,
+  destinyCities: destinyCities,
+  originCitySelected: selectedOriginCityReducer,
+  destinyCitySelected: selectedDestinyCityReducer,
+  flights: flights,
   cart: flightCart,
   bookFlights: bookFlights,
   flightSelected: selectedFlightReducer,
