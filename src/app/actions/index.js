@@ -1,9 +1,11 @@
-import { amadeousAPI, amadeusCityAPI, aviationStackAPI, iataAirportsAPI } from "../api/config";
+import { amadeousAPI, amadeusCityAPI } from "../api/config";
 import {
   FETCH_FLIGHTS,
   SELECT_ORIGIN_CITY,
   SELECT_DESTINY_CITY,
-  SELECT_FLIGHT } from "../constants";
+  SELECT_FLIGHT,
+  SET_DICTIONARY, 
+  PAGINATION} from "../constants";
 
 
 export const selectOriginCity = city => {
@@ -50,6 +52,7 @@ export const fetchFlights = (origin, destiny) => async dispatch => {
       originLocationCode: `${origin}`,
       destinationLocationCode: `${encodeURIComponent(destiny)}`,
       adults: 1,
+      currencyCode: 'USD',
       departureDate: (() => {
         const departureDate = new Date();
         return new Date(departureDate.getTime() - (departureDate.getTimezoneOffset() * 60000))
@@ -61,9 +64,24 @@ export const fetchFlights = (origin, destiny) => async dispatch => {
       'Authorization': `${localStorage.getItem('token_type')} ${localStorage.getItem('access_token')}`
     }
   });
-  console.log('fetch flights')
+  
   dispatch({
     type: FETCH_FLIGHTS,
     payload: response.data.data,
   });
+
+  dispatch({
+    type: SET_DICTIONARY,
+    payload: response.data.dictionaries,
+  });
+
+  dispatch({
+    type: PAGINATION,
+    payload: {
+      limit: 10,
+      total: response.data.meta.count,
+      pages: parseInt(response.data.meta.count / 10) + 1,
+      currentPage: 1,
+    }
+  })
 }

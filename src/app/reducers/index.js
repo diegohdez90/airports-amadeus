@@ -5,24 +5,9 @@ import {
   SELECT_FLIGHT, 
   FETCH_FLIGHTS,
   FETCH_ORIGIN_CITY,
-  FETCH_DESTINY_CITY } from "../constants";
-
-const citiesReducer = () => {
-  return [
-    { name: 'Mexico City' },
-    { name: 'Los Angeles' },
-    { name: 'New York' },
-    { name: 'Denver' },
-    { name: 'Miami' },
-    { name: 'Dallas' },
-    { name: 'San Francisco' },
-    { name: 'London' },
-    { name: 'Paris' },
-    { name: 'Barcelona' },
-    { name: 'Berlin' },
-    { name: 'Roma' },
-  ]
-};
+  FETCH_DESTINY_CITY, 
+  SET_DICTIONARY,
+  PAGINATION} from "../constants";
 
 const selectedOriginCityReducer = (selectedCity = '', action) => {
   switch (action.type) {
@@ -72,6 +57,50 @@ const flights = (state = [], action) => {
   }
 }
 
+const dictionary = (state = [], action) => {
+  switch (action.type) {
+    case SET_DICTIONARY:
+      return { ...state, 
+        locations: {
+          ...state.locations,
+          ...action.payload.locations
+        },
+        aircraft: {
+          ...state.aircraft,
+          ...action.payload.aircraft
+        },
+        currencies: {
+          ...state.currencies,
+          ...action.payload.currencies
+        },
+        carriers: {
+          ...state.carriers,
+          ...action.payload.carriers
+        }
+      }
+  
+    default:
+      return state;
+  }
+}
+
+const pagination = (state = {
+  total: 0,
+  limit: 10,
+  pages: 0,
+  currentPage: 1,
+}, action) => {
+  switch (action.type) {
+    case PAGINATION:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    default:
+      return state;
+  }
+}
+
 const selectedFlightReducer = (selectedFlight = null, action) => {
   switch (action.type) {
     case SELECT_FLIGHT:
@@ -91,12 +120,13 @@ const bookFlights = () => {
 }
 
 export default combineReducers({
-  cities: citiesReducer,
   originCities: originCities,
   destinyCities: destinyCities,
   originCitySelected: selectedOriginCityReducer,
   destinyCitySelected: selectedDestinyCityReducer,
   flights: flights,
+  dictionary: dictionary,
+  pagination: pagination,
   cart: flightCart,
   bookFlights: bookFlights,
   flightSelected: selectedFlightReducer,
