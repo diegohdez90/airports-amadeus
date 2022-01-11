@@ -3,7 +3,7 @@ import axios from 'axios';
 import CityList from "../CityList";
 import FlightList from "../FlightList";
 
-class App extends React.Component {
+class Home extends React.Component {
 
   componentDidMount() {
     if (!localStorage.getItem('client_id')) {
@@ -50,4 +50,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Home;
