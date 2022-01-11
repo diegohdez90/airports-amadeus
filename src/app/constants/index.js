@@ -7,3 +7,5 @@ export const FETCH_AIRPORTS = 'FETCH_AIRPORTS';
 export const FETCH_FLIGHTS = 'FETCH_FLIGHTS';
 export const SET_DICTIONARY = 'SET_DICTIONARY';
 export const PAGINATION = 'PAGINATION';
+export const ADD_FLIGHT = 'ADD_FLIGHT';
+export const NO_FLIGHTS_FOUND = 'NO_FLIGHTS_FOUND';

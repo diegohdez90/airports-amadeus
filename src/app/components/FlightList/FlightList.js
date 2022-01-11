@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { fetchFlights } from '../../actions';
+import { fetchFlights, addFlight } from '../../actions';
 import FlightDetail from '../FlightDetail';
 
 
@@ -14,23 +14,40 @@ export class FlightList extends Component {
     }
   }
 
+  addFlightToCart = (flightIndex) => {
+    console.log('index', flightIndex);
+    const {
+      flights,
+      addFlight } = this.props;
+    addFlight(flights[flightIndex]);
+  }
+
   listFlights = () => {
     const {
       limit,
       currentPage,
     } = this.props.pagination;
-    const { flights, dictionary } = this.props;
+    const {
+      flights,
+      dictionary,
+      noFlightFoundLabel } = this.props;
     const start = (currentPage - 1) * limit;
     const list = []
-    for (let flightIndex = start; flightIndex < limit; flightIndex++) {
-      list.push(<FlightDetail
-        segments={flights[flightIndex].itineraries[0].segments}
-        price={flights[flightIndex].price}
-        travelerPricings={flights[flightIndex].travelerPricings}
-        dictionary={dictionary}
-      />);
+    if (flights.length > 0) {
+      for (let flightIndex = start; flightIndex < limit; flightIndex++) {
+        list.push(<FlightDetail
+          segments={flights[flightIndex].itineraries[0].segments}
+          price={flights[flightIndex].price}
+          travelerPricings={flights[flightIndex].travelerPricings}
+          dictionary={dictionary}
+          bookFlight={this.addFlightToCart}
+          indexFlight={flightIndex}
+        />);
+      }
+      return list;
+    } else {
+      return <span>{noFlightFoundLabel}</span>
     }
-    return list;
   }
   
   render() {
@@ -51,12 +68,14 @@ const mapStateToProps = (state) => {
     destinyCity: state.destinyCitySelected,
     flights: state.flights,
     dictionary: state.dictionary,
-    pagination: state.pagination
+    pagination: state.pagination,
+    noFlightFoundLabel: state.noFlightFoundLabel,
   };
 };
 
 const mapDispatchToProps = {
-  fetchFlights: fetchFlights
+  fetchFlights: fetchFlights,
+  addFlight: addFlight
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FlightList);

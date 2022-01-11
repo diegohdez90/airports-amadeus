@@ -7,7 +7,9 @@ import {
   FETCH_ORIGIN_CITY,
   FETCH_DESTINY_CITY, 
   SET_DICTIONARY,
-  PAGINATION} from "../constants";
+  PAGINATION,
+  ADD_FLIGHT,
+  NO_FLIGHTS_FOUND} from "../constants";
 
 const selectedOriginCityReducer = (selectedCity = '', action) => {
   switch (action.type) {
@@ -86,7 +88,7 @@ const dictionary = (state = [], action) => {
 
 const pagination = (state = {
   total: 0,
-  limit: 10,
+  limit: 0,
   pages: 0,
   currentPage: 1,
 }, action) => {
@@ -101,6 +103,17 @@ const pagination = (state = {
   }
 }
 
+const noFlightFoundLabel = (state = '', action) => {
+  switch (action.type) {
+    case NO_FLIGHTS_FOUND:
+      
+      return action.payload
+  
+    default:
+      return state
+  }
+}
+
 const selectedFlightReducer = (selectedFlight = null, action) => {
   switch (action.type) {
     case SELECT_FLIGHT:
@@ -111,8 +124,13 @@ const selectedFlightReducer = (selectedFlight = null, action) => {
   }
 }
 
-const flightCart = () => {
-  return [];
+const flightCart = (state = [], action) => {
+  switch (action.type) {
+    case ADD_FLIGHT:
+      return [...state, action.payload];
+    default:
+      return state;
+  }
 };
 
 const bookFlights = () => {
@@ -127,6 +145,7 @@ export default combineReducers({
   flights: flights,
   dictionary: dictionary,
   pagination: pagination,
+  noFlightFoundLabel: noFlightFoundLabel,
   cart: flightCart,
   bookFlights: bookFlights,
   flightSelected: selectedFlightReducer,

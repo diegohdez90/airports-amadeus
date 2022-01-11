@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 const FlightDetail = ({
+  bookFlight,
+  indexFlight,
   segments,
   price,
   travelerPricings,
@@ -54,7 +56,7 @@ const FlightDetail = ({
                 <p className="font-bold">{price.currency} {price.total}</p>
                 <p className="text-xs text-gray-500">{travelerPricings[0].travelerType}</p>
               </div>
-              <button className="w-32 h-11 rounded flex border-solid border text-white bg-green-800 mx-2 justify-center place-items-center"><div className="">Book</div></button>
+              <button className="w-32 h-11 rounded flex border-solid border text-white bg-green-800 mx-2 justify-center place-items-center" onClick={(e) => { e.preventDefault(); bookFlight(indexFlight) }}><div className="">Book</div></button>
             </div>
           </div>
         </div>
@@ -68,6 +70,8 @@ FlightDetail.propTypes = {
   price:  PropTypes.object.isRequired,
   travelerPricings: PropTypes.array.isRequired,
   dictionary: PropTypes.object.isRequired,
+  bookFlight: PropTypes.func.isRequired,
+  indexFlight: PropTypes.number.isRequired
 }
 
 export default FlightDetail;

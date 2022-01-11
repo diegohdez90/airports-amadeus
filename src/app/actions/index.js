@@ -5,8 +5,10 @@ import {
   SELECT_DESTINY_CITY,
   SELECT_FLIGHT,
   SET_DICTIONARY, 
-  PAGINATION} from "../constants";
-
+  PAGINATION,
+  ADD_FLIGHT,
+  NO_FLIGHTS_FOUND } from "../constants";
+import moment from 'moment';
 
 export const selectOriginCity = city => {
   return {
@@ -54,7 +56,7 @@ export const fetchFlights = (origin, destiny) => async dispatch => {
       adults: 1,
       currencyCode: 'USD',
       departureDate: (() => {
-        const departureDate = new Date();
+        const departureDate = new Date(new moment(new Date()).add(1, 'day').format());
         return new Date(departureDate.getTime() - (departureDate.getTimezoneOffset() * 60000))
           .toISOString()
           .split("T")[0];
@@ -65,23 +67,43 @@ export const fetchFlights = (origin, destiny) => async dispatch => {
     }
   });
   
-  dispatch({
-    type: FETCH_FLIGHTS,
-    payload: response.data.data,
-  });
+  if (response.data.data.length > 0) {
+    dispatch({
+      type: FETCH_FLIGHTS,
+      payload: response.data.data,
+    });
 
-  dispatch({
-    type: SET_DICTIONARY,
-    payload: response.data.dictionaries,
-  });
+    dispatch({
+      type: SET_DICTIONARY,
+      payload: response.data.dictionaries,
+    });
 
-  dispatch({
-    type: PAGINATION,
-    payload: {
-      limit: 10,
-      total: response.data.meta.count,
-      pages: parseInt(response.data.meta.count / 10) + 1,
-      currentPage: 1,
-    }
-  })
+    dispatch({
+      type: PAGINATION,
+      payload: {
+        limit: 10,
+        total: response.data.meta.count,
+        pages: parseInt(response.data.meta.count / 10) + 1,
+        currentPage: 1,
+      }
+    });
+
+    dispatch({
+      type: NO_FLIGHTS_FOUND,
+      payload: '',
+    });
+  } else {
+    dispatch({
+      type: NO_FLIGHTS_FOUND,
+      payload: 'No Flights Found',
+    });
+  }
 }
+
+export const addFlight = (flight) => {
+  console.log('addFlight', flight);
+  return {
+    type: ADD_FLIGHT,
+    payload: flight
+  };
+};
