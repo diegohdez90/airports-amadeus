@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import CityList from "../../components/CityList";
-import FlightList from "../../components/FlightList";
+import CityList from "../CityList";
+import FlightList from "../FlightList";
 
 class App extends React.Component {
 
