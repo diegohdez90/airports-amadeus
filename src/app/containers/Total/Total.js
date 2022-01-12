@@ -20,9 +20,13 @@ const Total = ({
   )
 
   function getTotal() {
-    return flights.reduce((total, flight) => {
+    const nFormat = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    });
+    return nFormat.format(`${flights.reduce((total, flight) => {
       return total = total + Number(flight.price.total)
-    }, 0)
+    }, 0)}`);
   }
 
   function displayTotal() {
