@@ -7,8 +7,12 @@ import {
   SET_DICTIONARY, 
   PAGINATION,
   ADD_FLIGHT,
-  NO_FLIGHTS_FOUND } from "../constants";
+  NO_FLIGHTS_FOUND, 
+  DELETE_FLIGHT,
+  FETCH_ORIGIN_CITY,
+  FETCH_DESTINY_CITY} from "../constants";
 import moment from 'moment';
+import history from "../../history";
 
 export const selectOriginCity = city => {
   return {
@@ -92,6 +96,7 @@ export const fetchFlights = (origin, destiny) => async dispatch => {
       type: NO_FLIGHTS_FOUND,
       payload: '',
     });
+
   } else {
     dispatch({
       type: NO_FLIGHTS_FOUND,
@@ -100,10 +105,51 @@ export const fetchFlights = (origin, destiny) => async dispatch => {
   }
 }
 
-export const addFlight = (flight) => {
-  console.log('addFlight', flight);
-  return {
+export const addFlight = flight => dispatch => {
+  dispatch({
     type: ADD_FLIGHT,
     payload: flight
-  };
+  });
+
+  dispatch({
+    type: FETCH_FLIGHTS,
+    payload: [],
+  });
+
+  dispatch({
+    type: PAGINATION,
+    payload: {
+      limit: 0,
+      total: 0,
+      pages: 0,
+      currentPage: 1,
+    }
+  });
+
+  dispatch({
+    type: FETCH_ORIGIN_CITY,
+    payload: [],
+  });
+  dispatch({
+    type: FETCH_DESTINY_CITY,
+    payload: [],
+  });
+
+  dispatch({
+    type: SELECT_ORIGIN_CITY,
+    payload: ''
+  });
+  dispatch({
+    type: SELECT_DESTINY_CITY,
+    payload: ''
+  });
+
+  history.push('/cart');
 };
+
+export const deleteFlight = (flight) => {
+  return {
+    type: DELETE_FLIGHT,
+    payload: flight
+  }
+}

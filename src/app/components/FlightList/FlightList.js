@@ -15,7 +15,6 @@ export class FlightList extends Component {
   }
 
   addFlightToCart = (flightIndex) => {
-    console.log('index', flightIndex);
     const {
       flights,
       addFlight } = this.props;

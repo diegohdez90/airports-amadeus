@@ -1,22 +1,26 @@
 import React from 'react';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, Router } from 'react-router-dom';
 import Home from '../../components/Home'
-import Cart from '../Cart/Cart';
+import Cart from '../Cart';
+import history from '../../../history';
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <Router
+      navigator={history}
+      location={history.location}
+    >
       <Routes>
         <Route
           path='/'
           element={<Home />}
         />
         <Route
-          path='/cart'
+          path='cart'
           element={<Cart />}
         />
       </Routes>
-    </BrowserRouter>
+    </Router>
   )
 }
 

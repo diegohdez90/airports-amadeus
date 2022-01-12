@@ -10,6 +10,8 @@ const FlightDetail = ({
   price,
   travelerPricings,
   dictionary,
+  disabledBook,
+  removeFromList,
 }) => {
   return (
     <Fragment>
@@ -47,6 +49,7 @@ const FlightDetail = ({
               </Fragment>
             ))
           }
+          { !disabledBook &&
           <div className="mt-4 bg-gray-100 flex flex-row flex-wrap md:flex-nowrap justify-between items-baseline">
             <div className="flex mx-6 py-4 flex-row flex-wrap">
             </div>
@@ -59,6 +62,7 @@ const FlightDetail = ({
               <button className="w-32 h-11 rounded flex border-solid border text-white bg-green-800 mx-2 justify-center place-items-center" onClick={(e) => { e.preventDefault(); bookFlight(indexFlight) }}><div className="">Book</div></button>
             </div>
           </div>
+          }
         </div>
       </div>
     </Fragment>
@@ -70,8 +74,14 @@ FlightDetail.propTypes = {
   price:  PropTypes.object.isRequired,
   travelerPricings: PropTypes.array.isRequired,
   dictionary: PropTypes.object.isRequired,
-  bookFlight: PropTypes.func.isRequired,
-  indexFlight: PropTypes.number.isRequired
+  bookFlight: PropTypes.func,
+  indexFlight: PropTypes.number.isRequired,
+  disabledBook: PropTypes.bool,
+  removeFromList: PropTypes.func,
+}
+
+FlightDetail.defaultProps = {
+  disabledBook: false,
 }
 
 export default FlightDetail;

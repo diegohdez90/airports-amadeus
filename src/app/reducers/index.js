@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import _ from 'lodash';
 import {
   SELECT_ORIGIN_CITY,
   SELECT_DESTINY_CITY,
@@ -9,7 +10,8 @@ import {
   SET_DICTIONARY,
   PAGINATION,
   ADD_FLIGHT,
-  NO_FLIGHTS_FOUND} from "../constants";
+  NO_FLIGHTS_FOUND,
+  DELETE_FLIGHT} from "../constants";
 
 const selectedOriginCityReducer = (selectedCity = '', action) => {
   switch (action.type) {
@@ -59,7 +61,7 @@ const flights = (state = [], action) => {
   }
 }
 
-const dictionary = (state = [], action) => {
+const dictionary = (state = {}, action) => {
   switch (action.type) {
     case SET_DICTIONARY:
       return { ...state, 
@@ -128,14 +130,14 @@ const flightCart = (state = [], action) => {
   switch (action.type) {
     case ADD_FLIGHT:
       return [...state, action.payload];
-    default:
+
+    case DELETE_FLIGHT:
+      return _.omit(state, action.payload);
+
+      default:
       return state;
   }
 };
-
-const bookFlights = () => {
-  return [];
-}
 
 export default combineReducers({
   originCities: originCities,
@@ -147,6 +149,5 @@ export default combineReducers({
   pagination: pagination,
   noFlightFoundLabel: noFlightFoundLabel,
   cart: flightCart,
-  bookFlights: bookFlights,
   flightSelected: selectedFlightReducer,
 })
