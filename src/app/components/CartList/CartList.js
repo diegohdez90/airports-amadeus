@@ -13,18 +13,19 @@ const CartList = ({
     removeFlightFromCart(index)
   }
 
-  const renderList = () => {
-    flights.map((flight, flightIndex) => {
+  const renderList = () => 
+    flights.map((flight, flightIndex) => (
       <FlightDetail
+        key={flight.id}
         segments={flight.itineraries[0].segments}
         price={flight.price}
         travelerPricings={flight.travelerPricings}
         dictionary={dictionary}
         indexFlight={flightIndex}
         removeFromList={removeFromCart}
+        disabledBook={true}
       />
-    })
-  }
+    ));
 
   
   return (

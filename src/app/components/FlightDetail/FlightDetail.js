@@ -12,12 +12,14 @@ const FlightDetail = ({
   dictionary,
   disabledBook,
   removeFromList,
+  disabledCancel,
 }) => {
   return (
     <Fragment>
       <div className="p-10">
-        <div className="max-w-full  bg-white flex flex-col rounded overflow-hidden shadow-lg">
+        <div className="max-w-full content-center bg-white flex flex-col rounded overflow-hidden shadow-lg">
           <div className="flex flex-row items-baseline flex-nowrap bg-gray-100 p-2">
+            {!disabledCancel && <button className="rounded-full bg-red-600 text-slate-100 p-2">Remove from cart</button> }
             <h1 className="ml-2 uppercase font-bold text-gray-500">departure</h1>
             <p className="ml-2 font-normal text-gray-500">{new moment(segments[0].departure.at).format('dddd, MMMM Do')}</p>
           </div>
@@ -77,11 +79,13 @@ FlightDetail.propTypes = {
   bookFlight: PropTypes.func,
   indexFlight: PropTypes.number.isRequired,
   disabledBook: PropTypes.bool,
+  disabledCancel: PropTypes.bool,
   removeFromList: PropTypes.func,
 }
 
 FlightDetail.defaultProps = {
   disabledBook: false,
+  disabledCancel: false,
 }
 
 export default FlightDetail;

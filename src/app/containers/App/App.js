@@ -1,14 +1,14 @@
 import React from 'react';
-import { Routes, Route, Router } from 'react-router-dom';
-import Home from '../../components/Home'
+import { Routes, Route } from 'react-router-dom';
+import Home from '../../components/Home';
 import Cart from '../Cart';
+import Router from '../CustomRouter';
 import history from '../../../history';
 
 const App = () => {
   return (
     <Router
-      navigator={history}
-      location={history.location}
+      history={history}
     >
       <Routes>
         <Route
