@@ -102,6 +102,26 @@ export const fetchFlights = (origin, destiny) => async dispatch => {
       type: NO_FLIGHTS_FOUND,
       payload: 'No Flights Found',
     });
+
+    dispatch({
+      type: FETCH_ORIGIN_CITY,
+      payload: [],
+    });
+
+    dispatch({
+      type: FETCH_DESTINY_CITY,
+      payload: [],
+    });
+
+    dispatch({
+      type: SELECT_ORIGIN_CITY,
+      payload: '',
+    });
+
+    dispatch({
+      type: SELECT_DESTINY_CITY,
+      payload: '',
+    });
   }
 }
 

@@ -10,13 +10,13 @@ const CartList = ({
 }) => {
 
   const removeFromCart = (index) => {
-    removeFlightFromCart(index)
+    removeFlightFromCart(index);
   }
 
   const renderList = () => 
     flights.map((flight, flightIndex) => (
       <FlightDetail
-        key={flight.id}
+        key={flightIndex}
         segments={flight.itineraries[0].segments}
         price={flight.price}
         travelerPricings={flight.travelerPricings}

@@ -127,12 +127,13 @@ const selectedFlightReducer = (selectedFlight = null, action) => {
 }
 
 const flightCart = (state = [], action) => {
+  console.log(action.payload);
   switch (action.type) {
     case ADD_FLIGHT:
       return [...state, action.payload];
 
     case DELETE_FLIGHT:
-      return _.omit(state, action.payload);
+      return state.filter((item, index) => index !== action.payload)
 
       default:
       return state;

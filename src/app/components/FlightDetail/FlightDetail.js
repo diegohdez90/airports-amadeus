@@ -19,7 +19,13 @@ const FlightDetail = ({
       <div className="p-10">
         <div className="max-w-full content-center bg-white flex flex-col rounded overflow-hidden shadow-lg">
           <div className="flex flex-row items-baseline flex-nowrap bg-gray-100 p-2">
-            {!disabledCancel && <button className="rounded-full bg-red-600 text-slate-100 p-2">Remove from cart</button> }
+            {!disabledCancel && <button
+              className="rounded-full bg-red-600 text-slate-100 p-2"
+              onClick={(e) => {
+                e.preventDefault();
+                removeFromList(indexFlight);
+              }}
+            >Remove from cart</button> }
             <h1 className="ml-2 uppercase font-bold text-gray-500">departure</h1>
             <p className="ml-2 font-normal text-gray-500">{new moment(segments[0].departure.at).format('dddd, MMMM Do')}</p>
           </div>
@@ -51,7 +57,6 @@ const FlightDetail = ({
               </Fragment>
             ))
           }
-          { !disabledBook &&
           <div className="mt-4 bg-gray-100 flex flex-row flex-wrap md:flex-nowrap justify-between items-baseline">
             <div className="flex mx-6 py-4 flex-row flex-wrap">
             </div>
@@ -61,10 +66,12 @@ const FlightDetail = ({
                 <p className="font-bold">{price.currency} {price.total}</p>
                 <p className="text-xs text-gray-500">{travelerPricings[0].travelerType}</p>
               </div>
-              <button className="w-32 h-11 rounded flex border-solid border text-white bg-green-800 mx-2 justify-center place-items-center" onClick={(e) => { e.preventDefault(); bookFlight(indexFlight) }}><div className="">Book</div></button>
+              {
+                !disabledBook &&
+                <button className="w-32 h-11 rounded flex border-solid border text-white bg-green-800 mx-2 justify-center place-items-center" onClick={(e) => { e.preventDefault(); bookFlight(indexFlight) }}><div className="">Book</div></button>
+              }
             </div>
           </div>
-          }
         </div>
       </div>
     </Fragment>
