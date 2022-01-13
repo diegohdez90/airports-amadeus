@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { deleteFlight } from '../../actions';
 import CartList from '../../components/CartList';
-import Total from '../Total';
+import Total from '../../components/Total';
 
 export class Cart extends Component {
 
@@ -14,14 +14,16 @@ export class Cart extends Component {
     return (
       <div className="container mx-auto px-4">
         <div className="grid auto-rows-max gap-4">
-          <CartList 
-            flights={this.props.cart}
-            dictionary={this.props.dictionary}
-            removeFlightFromCart={this.removeFlightFromCart}
+          <div className="p-10">
+            <CartList
+              flights={this.props.cart}
+              dictionary={this.props.dictionary}
+              removeFlightFromCart={this.removeFlightFromCart}
+              />
+            <Total 
+              flights={this.props.cart}
             />
-          <Total 
-            flights={this.props.cart}
-          />
+          </div>
         </div>
       </div>
     )

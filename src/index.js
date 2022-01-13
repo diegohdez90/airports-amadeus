@@ -8,6 +8,8 @@ import App from './app/containers/App';
 import reducers from './app/reducers';
 
 import './index.css';
+import '../node_modules/@themesberg/flowbite/dist/flowbite.bundle.js'
+import '@themesberg/flowbite';
 
 const store = createStore(reducers, applyMiddleware(thunk));
 

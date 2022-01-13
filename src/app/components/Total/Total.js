@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react';
+import history from '../../../history';
+
 
 const Total = ({
   flights
@@ -36,7 +38,13 @@ const Total = ({
         <div className="grid grid-col-1 ">
           <p className="self-center text-center">{`Total: ${total}`}</p>
         </div>
-        <button className="text-white bg-green-700 hover:bg-green-800 rounded text-center p-4">Procced to pay</button>
+        <button
+          className="text-white bg-green-700 hover:bg-green-800 rounded text-center p-4"
+          onClick={e => {
+            e.preventDefault();
+            history.push('/confirm');
+          }}
+        >Procced to pay</button>
       </div>
     )
     return <div className="grid grid-cols-1">

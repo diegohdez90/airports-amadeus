@@ -43,8 +43,10 @@ class Home extends React.Component {
   render () {
     return (<div className="container mx-auto px-4">
       <div className="grid auto-rows-max gap-4">
-        <CityList />
-        <FlightList />
+        <div className="p-10">
+            <CityList />
+            <FlightList />
+        </div>
       </div>
     </div>);
   }
