@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useNavigate }  from 'react-router-dom';
 import history from '../../../history';
 
 
@@ -12,9 +11,6 @@ const Total = ({
   useEffect(() => {
     setTotal(getTotal);
   }, [flights])
-
-  const navigate = useNavigate();
-
 
   return (
     <div>

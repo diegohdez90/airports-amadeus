@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-import _ from 'lodash';
 import {
   SELECT_ORIGIN_CITY,
   SELECT_DESTINY_CITY,
