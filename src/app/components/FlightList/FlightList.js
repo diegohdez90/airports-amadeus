@@ -6,7 +6,6 @@ import FlightDetail from '../FlightDetail';
 export class FlightList extends Component {
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('flight list', this.props);
     if ((prevProps.originCity !== this.props.originCity ||
       prevProps.destinyCity !== this.props.destinyCity) && (this.props.originCity.length > 0 && this.props.destinyCity.length > 0)) {
       this.props.fetchFlights(this.props.originCity, this.props.destinyCity);

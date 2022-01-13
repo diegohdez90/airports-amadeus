@@ -10,3 +10,4 @@ export const PAGINATION = 'PAGINATION';
 export const ADD_FLIGHT = 'ADD_FLIGHT';
 export const DELETE_FLIGHT = 'DELETE_FLIGHT';
 export const NO_FLIGHTS_FOUND = 'NO_FLIGHTS_FOUND';
+export const CLEAR_CART = 'CLEAR_CART';

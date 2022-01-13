@@ -11,7 +11,8 @@ import {
   PAGINATION,
   ADD_FLIGHT,
   NO_FLIGHTS_FOUND,
-  DELETE_FLIGHT} from "../constants";
+  DELETE_FLIGHT,
+  CLEAR_CART} from "../constants";
 
 const selectedOriginCityReducer = (selectedCity = '', action) => {
   switch (action.type) {
@@ -127,13 +128,15 @@ const selectedFlightReducer = (selectedFlight = null, action) => {
 }
 
 const flightCart = (state = [], action) => {
-  console.log(action.payload);
   switch (action.type) {
     case ADD_FLIGHT:
       return [...state, action.payload];
 
     case DELETE_FLIGHT:
-      return state.filter((item, index) => index !== action.payload)
+      return state.filter((item, index) => index !== action.payload);
+
+    case CLEAR_CART:
+      return action.payload;
 
       default:
       return state;

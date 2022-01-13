@@ -10,7 +10,8 @@ import {
   NO_FLIGHTS_FOUND, 
   DELETE_FLIGHT,
   FETCH_ORIGIN_CITY,
-  FETCH_DESTINY_CITY} from "../constants";
+  FETCH_DESTINY_CITY,
+  CLEAR_CART } from "../constants";
 import moment from 'moment';
 import history from "../../history";
 
@@ -171,5 +172,14 @@ export const deleteFlight = (flight) => {
   return {
     type: DELETE_FLIGHT,
     payload: flight
-  }
+  };
+}
+
+export const clearCart = () => dispatch => {
+  dispatch({
+    type: CLEAR_CART,
+    payload: []
+  });
+
+  history.replace('/');
 }

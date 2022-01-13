@@ -31,7 +31,6 @@ export class Cart extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('cart', state);
   return {
     cart: state.cart,
     dictionary: state.dictionary,
