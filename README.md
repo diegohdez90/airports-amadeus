@@ -2,6 +2,23 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## How to install
+
+Command to install all dependencies from the project
+
+```
+$ yarn install
+```
+
+## How to run the project locally
+
+```
+$ yarn start
+```
+
+Open browser in [http://localhost:3000](http://localhost:3000)
+
+
 ## Available Scripts
 
 In the project directory, you can run:
