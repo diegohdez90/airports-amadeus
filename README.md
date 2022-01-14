@@ -4,6 +4,20 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## How to install
 
+
+Clone repository using `git`
+
+
+```
+$ git clone https://github.com/diegohdez90/airports-amadeus.git
+```
+
+Move to direcoty created `airports-amadeus`
+
+```
+$ cd airports-amadeus
+```
+
 Command to install all dependencies from the project
 
 ```
